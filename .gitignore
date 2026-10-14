@@ -1,0 +1,9 @@
+node_modules/
+frontend/dist/
+frontend/coverage/
+coverage/
+backend/web/dist/*
+!backend/web/dist/.gitkeep
+.env
+.DS_Store
+*.tsbuildinfo

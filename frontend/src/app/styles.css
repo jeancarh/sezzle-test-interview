@@ -1,0 +1,245 @@
+:root {
+  --bg: #f4f4f1;
+  --surface: #ffffff;
+  --surface-sunken: #ecece7;
+  --text: #1b1b19;
+  --muted: #6b6b65;
+  --border: #dedcd5;
+  --key-digit: #ffffff;
+  --key-function: #e7e6e0;
+  --key-operator: #e3ecf6;
+  --key-operator-text: #1d4e89;
+  --key-equals: #1d4e89;
+  --key-equals-text: #ffffff;
+  --pressed: #1d4e89;
+  --pressed-text: #ffffff;
+  --danger: #a3301f;
+  --focus: #2f6fd1;
+  --radius: 10px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121311;
+    --surface: #1c1d1b;
+    --surface-sunken: #161715;
+    --text: #ededea;
+    --muted: #9d9d97;
+    --border: #2f302d;
+    --key-digit: #262725;
+    --key-function: #31322f;
+    --key-operator: #1e2b3b;
+    --key-operator-text: #a9c8f0;
+    --key-equals: #5b93dc;
+    --key-equals-text: #0b1522;
+    --pressed: #5b93dc;
+    --pressed-text: #0b1522;
+    --danger: #f0907f;
+    --focus: #7fb0f2;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.layout {
+  min-height: 100vh;
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  justify-content: center;
+  grid-template-columns: minmax(0, 380px);
+  padding: 1rem 16px 2rem;
+}
+
+.calculator {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.display {
+  background: var(--surface-sunken);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  text-align: right;
+  min-width: 0;
+}
+
+.expression {
+  color: var(--muted);
+  font-size: 0.95rem;
+  min-height: 1.4em;
+  overflow-wrap: anywhere;
+}
+
+.value {
+  display: block;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  line-height: 1.15;
+}
+
+.value-large {
+  font-size: 2.6rem;
+}
+
+.value-medium {
+  font-size: 1.8rem;
+}
+
+.value-small {
+  font-size: 1.2rem;
+}
+
+.value[aria-busy="true"] {
+  opacity: 0.6;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.9rem;
+  min-height: 1.3em;
+  margin: 0.25rem 0 0;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.key {
+  font: inherit;
+  font-size: 1.25rem;
+  min-height: 56px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--key-digit);
+  color: var(--text);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: filter 80ms ease;
+}
+
+.key:hover {
+  filter: brightness(0.96);
+}
+
+.key:active {
+  filter: brightness(0.9);
+}
+
+.key:focus-visible,
+.tape button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.key-function {
+  background: var(--key-function);
+}
+
+.key-operator {
+  background: var(--key-operator);
+  color: var(--key-operator-text);
+}
+
+.key-operator[aria-pressed="true"] {
+  background: var(--pressed);
+  color: var(--pressed-text);
+}
+
+.key-equals {
+  background: var(--key-equals);
+  color: var(--key-equals-text);
+  border-color: var(--key-equals);
+}
+
+.key-wide {
+  grid-column: span 2;
+}
+
+.tape {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  padding: 1rem;
+}
+
+.tape h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.tape ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.tape button {
+  width: 100%;
+  font: inherit;
+  display: grid;
+  gap: 0.1rem;
+  justify-items: end;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.tape button:hover {
+  background: var(--surface-sunken);
+}
+
+.tape-expression {
+  color: var(--muted);
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.tape-result {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.tape-empty {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 820px) {
+  .layout {
+    grid-template-columns: 380px 300px;
+    padding-top: 3rem;
+  }
+}
